@@ -7,7 +7,7 @@ score 100
 Lesson 2<br>
 (1) OddOccurrencesInArray<br>
 题意：找到一个数组里只出现了一次的数字。**要求时间复杂度O(n)，空间复杂度O(1)。**<br>
-解法：bingo！在诗兄帮助下知道了xor这个黑科技。。**所有元素xor后最后就是答案！**score 100<br>
+解法：bingo！在诗兄帮助下知道了xor这个黑科技。。**所有元素xor后最后就是答案！** <br>
 ```
 class Solution {
     public int solution(int[] A) {
