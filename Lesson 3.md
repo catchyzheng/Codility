@@ -45,7 +45,28 @@ class Solution {
 
 (3)  TapeEquilibrium<br>
 题意：给一个数组，找到一个下标p，使得a[0],...a[p-1]之和与a[p]之后的和的绝对值差最小。<br>
-解法：题目不难，但关键在于，**左右每个部分至少要有一个元素的**。所以改成下面的版本。score 100 通过。<br>
+先是很快打出下面这段代码， <br>
+```
+class Solution {
+    public int solution(int[] A) {
+        int sum = 0;
+        int len = A.length;
+        for(int i=0;i<len;i++){
+            sum+=A[i];
+        }
+        int min_diff=sum;
+        int left_sum=0, right_sum=sum;
+        for(int i=0;i<len;i++){
+            left_sum+=A[i]; right_sum-=A[i];
+            if(Math.abs(left_sum-right_sum)<min_diff){
+                min_diff = Math.abs(left_sum-right_sum);
+            }
+        }
+        return min_diff;
+    }
+}
+```
+ 后来发现，左右每个部分至少要有一个元素的。所以改成下面的版本。score 100 通过。<br>
 ```
 class Solution {
     public int solution(int[] A) {

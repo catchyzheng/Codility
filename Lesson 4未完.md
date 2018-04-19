@@ -1,3 +1,31 @@
+[Lesson 4 Counting Elements](https://app.codility.com/programmers/lessons/4-counting_elements/)<br>
+(4) MaxCounter<br>
+题意：给定整数N和数组A，对于一个长度为N的数组ans，A[]代表了对它的一系列操作。按照以下规则操作数组ans：<br>
+如果A[i]等于N+1，则ans全体设置为当前ans元素的最大值。否则，对ans中第A[i]个元素+1.<br>
+求最后的ans。
+解法：以下代码，鸣谢子聪。
+```
+using namespace std;
+vector<int> solution(int N, vector<int> &A) {
+    vector<int> bucket(N, 0);
+    int m = A.size();
+    priority_queue<int> q;
+    q.push(0);
+    int maxcnt = 0;
+    for (int i = 0; i < m; i++) {
+        --A[i];
+        if (A[i] == N) {
+            maxcnt = q.top();
+        } else {
+            bucket[A[i]] = max(maxcnt, bucket[A[i]]) + 1;
+            q.push(bucket[A[i]]);
+        }
+    }
+    for (int i = 0; i < N; i++)
+        bucket[i] = max(maxcnt, bucket[i]);
+    return bucket;
+}
+```
 (1) PermCheck<br>
 题意：判断数组是不是一个排列。<br>
 解法：设数组长度len，如果其中有元素大于len或者小于1，直接false。之后再用标记判断。<br>
@@ -67,31 +95,6 @@ class Solution {
             }
             return ans;
         }
-    }
-}
-```
-(4) MaxCounter<br>
-题意：给定整数N和数组A，对于一个长度为N的数组ans，A[]代表了对它的一系列操作。按照以下规则操作数组ans：<br>
-如果A[i]等于N+1，则ans全体设置为当前ans元素的最大值。否则，对ans中第A[i]个元素+1.<br>
-求最后的ans。
-解法：以下代码perform 77，效率不高。。日后看看如何改进 <br>
-```
-class Solution {
-    public int[] solution(int N, int[] A) {
-        int[] ans= new int[N];
-        int max_=0;
-        for(int i=0;i<A.length;i++){
-            if(A[i]==N+1){
-                for(int j=0;j<N;j++){
-                    ans[j]=max_;
-                }
-            }
-            else {
-                ans[A[i]-1]++;
-                if(max_<ans[A[i]-1]) max_=ans[A[i]-1];
-            }
-        }
-        return ans;
     }
 }
 ```
